@@ -3,7 +3,7 @@ import React from 'react'
 const VerificationPage = () => {
     return (
         <div>
-            Verify page
+            <VerificationPage/>
         </div>
     )
 }
