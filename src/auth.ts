@@ -7,10 +7,15 @@ import { getUserById } from "./data/user"
 export const { handlers, signIn, signOut, auth } = NextAuth({
     ...authConfig,
     callbacks: {
-        signIn: async ({ user }) => {
+        signIn: async ({ user, account }) => {
+            // Allow oAuth without email verification
+            if (account?.provider !== "credentials") return true
+
             if (!user.id) {
                 return false
             }
+
+            // Prevent sign in without email verification
             const existingUser = await getUserById(user.id)
             if (!existingUser || !existingUser.emailVerified) {
                 return false
