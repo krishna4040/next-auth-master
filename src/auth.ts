@@ -7,7 +7,7 @@ import { getUserById } from "./data/user"
 export const { handlers, signIn, signOut, auth } = NextAuth({
     ...authConfig,
     callbacks: {
-        signIn: async ({user}) => {
+        signIn: async ({ user }) => {
             if (!user.id) {
                 return false
             }
@@ -17,7 +17,7 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
             }
             return true
         },
-        session: async ({session, token}) => {
+        session: async ({ session, token }) => {
             if (session.user && token.sub) {
                 session.user.id = token.sub
             }
@@ -39,5 +39,17 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
     adapter: PrismaAdapter(db),
     session: {
         strategy: 'jwt',
+    },
+    pages: {
+        signIn: '/auth/login',
+        signOut: '/auth/error'
+    },
+    events: {
+        linkAccount: async ({ user }) => {
+            await db.user.update({
+                where: { id: user.id },
+                data: { emailVerified: new Date() }
+            })
+        }
     }
 })
