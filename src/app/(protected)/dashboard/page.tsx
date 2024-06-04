@@ -1,7 +1,7 @@
 import React from 'react'
 import { auth, signOut } from '@/auth'
 
-const SettingsPage = async () => {
+const DashboardPage = async () => {
     const session = await auth();
 
     return (
@@ -14,4 +14,4 @@ const SettingsPage = async () => {
     )
 }
 
-export default SettingsPage
+export default DashboardPage
