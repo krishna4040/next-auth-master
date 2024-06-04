@@ -5,7 +5,7 @@ import { Avatar, AvatarFallback, AvatarImage } from "@radix-ui/react-avatar"
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@radix-ui/react-dropdown-menu"
 import { FaUser } from "react-icons/fa"
 import { LogoutButton } from "./LogoutButton"
-import { DropdownMenuIcon, ExitIcon } from "@radix-ui/react-icons"
+import { ExitIcon } from "@radix-ui/react-icons"
 
 export const UserButton = () => {
     const user = useCurrentUser()

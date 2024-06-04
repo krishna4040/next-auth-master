@@ -1,16 +1,18 @@
 import React from 'react'
-import { auth, signOut } from '@/auth'
+import { signOut } from '@/auth'
+import { currentUser } from '@/lib/current-user'
+import { UserInfo } from '@/components/auth/UserInfo'
 
 const DashboardPage = async () => {
-    const session = await auth();
+    const user = await currentUser()
 
     return (
-        <form action={async () => {
-            "use sever"
-            await signOut()
-        }}>
-            <button>Sign Out</button>
-        </form>
+        <main>
+            <UserInfo
+                user={user}
+                label='Server Component 💻'
+            />
+        </main>
     )
 }
 
