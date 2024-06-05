@@ -1,9 +1,8 @@
 services:
-  server:
+  next-auth:
     build:
       context: .
-    environment:
-      NODE_ENV: production
+      dockerfile: ./Dockerfile
     ports:
       - 3000:3000
     depends_on:
@@ -13,14 +12,8 @@ services:
     image: postgres
     restart: always
     user: postgres
-    secrets:
-      - db-password
-    volumes:
-      - db-data:/var/lib/postgresql/data
     environment:
-      - POSTGRES_USER=${DB_USER}
       - POSTGRES_PASSWORD=${DB_PASSWORD}
-      - POSTGRES_DB=${DB_NAME}
     expose:
       - 5432
     healthcheck:
@@ -28,8 +21,3 @@ services:
       interval: 10s
       timeout: 5s
       retries: 5
-volumes:
-  db-data:
-secrets:
-  db-password:
-    file: db/password.txt
