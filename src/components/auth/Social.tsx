@@ -2,8 +2,9 @@
 import { FaGithub } from 'react-icons/fa'
 import { FcGoogle } from 'react-icons/fc'
 import { Button } from '../ui/button'
-import { signIn } from '@/auth'
+import { signIn } from 'next-auth/react'
 import { DEFAULT_LOGIN_REDIRECT } from '@/routes'
+import { useSearchParams } from 'next/navigation'
 
 enum Providers {
     GOOGLE = "google",
@@ -11,9 +12,12 @@ enum Providers {
 }
 
 export const Social = () => {
+    const searchParams = useSearchParams()
+    const callbackUrl = searchParams.get("callbackUrl")
+
     const onClick = (provider: Providers) => {
         signIn(provider, {
-            redirectTo: DEFAULT_LOGIN_REDIRECT
+            redirectTo: callbackUrl || DEFAULT_LOGIN_REDIRECT
         })
     }
 
