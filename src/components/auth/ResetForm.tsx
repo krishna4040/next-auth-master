@@ -10,7 +10,7 @@ import { Button } from "../ui/button"
 import { FormError } from "./FormError"
 import { FormSuccess } from "./FormSucess"
 import { useState, useTransition } from "react"
-import { reset } from "@/actions/action"
+import { reset } from "@/actions/reset";
 
 export const ResetForm = () => {
     const [isPending, startTransition] = useTransition()
